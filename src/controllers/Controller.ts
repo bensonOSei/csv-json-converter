@@ -1,18 +1,12 @@
 import { Request, Response, NextFunction, Router } from "express";
-import { Routes } from "../routes/Routes";
 
 export abstract class Controller {
   public router: Router;
-  protected routes?: Routes
 
   constructor() {
     this.router = Router();
     this.initializeRoutes = this.initializeRoutes.bind(this); // Bind the context
     this.initializeRoutes()
-  }
-
-  protected setRoutes(route: Routes) {
-    this.routes = route;
   }
 
   // Each controller will need to implement this method

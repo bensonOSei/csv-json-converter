@@ -1,15 +1,18 @@
-import { Request, Response, Router } from "express";
-import { IRouter } from "../interfaces/iRouter";
-import ImageUpload from "../middleware/ImageUpload";
-import { Routes } from "./Routes";
+import { AppRouter } from "./AppRouter";
+import { CsvController } from "../controllers/CsvController";
 
-export class CsvRouter extends Routes {
-  public runRoutes() {
-    return this.router.get('/',(req: Request, res: Response) => {
-        return res.json({
-            message: 'Working!'
-        })
-    })
-    // this.router.post("/convert", ImageUpload.single("csv"));
+class CsvRouter extends AppRouter {
+  private controller: CsvController;
+
+  constructor() {
+    super()
+    this.controller = new CsvController();
+    this.run()
+  }
+
+  run() {
+    this.router.get('/', this.controller.test)
   }
 }
+
+export default new CsvRouter().router;

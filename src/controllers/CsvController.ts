@@ -1,10 +1,8 @@
 import { Request, Response, Router } from "express";
-import { CsvRouter } from "../routes/CsvRouter";
 import { Controller } from "./Controller";
 import { Log } from "../utils/decorators/route-decorators";
 
-class CsvController extends Controller {
-  @Log
+export class CsvController extends Controller {
   public initializeRoutes(): void {
     this.router.get("/", (req: Request, res: Response) =>
       res.json({
@@ -13,6 +11,11 @@ class CsvController extends Controller {
     );
   }
 
+  public test(req: Request, response: Response) {
+    return response.json({
+        message: "test"
+    })
+  }
+
 }
 
-export default new CsvController();

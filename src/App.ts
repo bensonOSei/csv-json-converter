@@ -1,7 +1,7 @@
 import express, { Application } from "express";
-import CsvController from "./controllers/CsvController";
+import { Routes } from "./Routes";
 
-class App {
+export class App {
   public express: Application;
 
   constructor() {
@@ -15,8 +15,13 @@ class App {
   }
 
   private routes() {
-    this.express.use('/api/csv', CsvController.router)
+    const apiRoutes = new Routes(this.express);
+    apiRoutes.initializeRoutes();
+  }
+
+  public serve(port: number) {
+    this.express.listen(port, () => {
+      console.log(`🚀 Server is running on port ${port}`);
+    });
   }
 }
-
-export default new App().express;
