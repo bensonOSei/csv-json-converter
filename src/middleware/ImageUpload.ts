@@ -28,7 +28,7 @@ class ImageUpload {
            storage: this.storage(),
             limits: { fileSize: 1000000 }, // 1MB
             fileFilter: (req, file, cb) => {
-                const filetypes = /jpeg|jpg|png/;
+                const filetypes = /csv/;
                 const extname = filetypes.test(
                     path.extname(file.originalname).toLowerCase()
                 );
@@ -37,7 +37,7 @@ class ImageUpload {
                 if (mimetype && extname) {
                     return cb(null, true);
                 } else {
-                    cb(new Error('Error: Images Only!'));
+                    cb(new Error('Error: CSV Only!'));
                 }
             },
         });

@@ -11,6 +11,8 @@
     ],
     "rules": {
         "no-console": "warn",
-        "no-tabs": "error"
+        "no-tabs": "error",
+        "no-undef": "error",
+        "no-unused-vars": "off"
     }
   }
