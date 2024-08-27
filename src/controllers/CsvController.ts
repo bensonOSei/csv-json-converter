@@ -3,14 +3,11 @@ import { Controller } from "./Controller";
 import { CsvConverter } from "../services/CsvConverter";
 import { Response as JsonResponse } from "../utils/Response";
 import { HttpNotFound } from "../handlers/HttpNotFound";
+import { HttpStatusCodes } from "../enums/HttpStatusCodes";
 
 export class CsvController extends Controller {
-  public initializeRoutes(): void {
-    this.router.get("/", (req: Request, res: Response) => res.json(Response));
-  }
-
   public test(req: Request, response: Response) {
-    return response.json(JsonResponse.success());
+    return response.status(HttpStatusCodes.NO_CONTENT).end();
   }
 
   public async convert(req: Request, response: Response, next: NextFunction) {
