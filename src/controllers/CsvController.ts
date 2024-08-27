@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { Controller } from "./Controller";
 import { CsvConverter } from "../services/CsvConverter";
 import { Response as JsonResponse } from "../utils/Response";
+import { HttpNotFound } from "../handlers/HttpNotFound";
 
 export class CsvController extends Controller {
   public initializeRoutes(): void {
@@ -16,7 +17,7 @@ export class CsvController extends Controller {
     const path = req.file?.path;
 
     try {
-      if (!path) throw Error("no file path found");
+      if (!path) throw new HttpNotFound("CSV not found");
 
       const converter = new CsvConverter(path);
       await converter.convert();
