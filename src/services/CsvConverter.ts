@@ -1,27 +1,20 @@
 import { parse } from "csv-parse";
 import fs from "fs";
 
-export class CsvConverter {
-  public results: string[] = [];
+export class CsvConverter<T = Record<string, any>> {
+  public results: T[] = [];
 
-  constructor(private csv: string) {
-    this.csv = csv;
-  }
+  constructor(private readonly csvFilePath: string) {}
 
   public async convert(): Promise<void> {
-
-    await new Promise<void>((resolve, reject) => {
-      fs.createReadStream(this.csv)
+    return new Promise<void>((resolve, reject) => {
+      fs.createReadStream(this.csvFilePath)
         .pipe(parse({ columns: true }))
-        .on("data", (row: any) => {
+        .on("data", (row: T) => {
           this.results.push(row);
         })
-        .on("end", () => {
-          resolve();
-        })
-        .on("error", (error: any) => {
-          reject(error);
-        });
+        .on("end", () => resolve())
+        .on("error", (error: Error) => reject(error));
     });
   }
 }
