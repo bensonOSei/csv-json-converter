@@ -3,16 +3,16 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default [
-  { 
-    files: ["**/*.{js,mjs,cjs,ts}"], 
-    ignores: ["node_modules", "dist"] ,
+  {
+    files: ["**/*.{js,mjs,cjs,ts}"],
+    ignores: ["node_modules", "dist"],
   },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
     rules: {
-      "no-unused-vars": "off"
-    }
-  }
+      "no-unused-vars": "off",
+    },
+  },
 ];

@@ -9,5 +9,5 @@ export abstract class AppRouter implements IRouter {
     this.run = this.run.bind(this);
   }
 
-  public abstract run(): void
+  public abstract run(): void;
 }

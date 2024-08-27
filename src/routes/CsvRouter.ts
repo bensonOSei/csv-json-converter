@@ -6,14 +6,18 @@ class CsvRouter extends AppRouter {
   private controller: CsvController;
 
   constructor() {
-    super()
+    super();
     this.controller = new CsvController();
-    this.run()
+    this.run();
   }
 
   run() {
-    this.router.get('/', this.controller.test)
-    this.router.post('/convert', ImageUpload.single('csv') ,this.controller.convert)
+    this.router.get("/", this.controller.test);
+    this.router.post(
+      "/convert",
+      ImageUpload.single("csv"),
+      this.controller.convert,
+    );
   }
 }
 

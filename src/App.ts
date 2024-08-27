@@ -9,7 +9,7 @@ export class App {
     this.express = express();
     this.middleware();
     this.routes();
-    this.express.use(ErrorHandler.handleError)
+    this.express.use(ErrorHandler.handleError);
   }
 
   private middleware() {

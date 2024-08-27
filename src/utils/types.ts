@@ -1,1 +1,1 @@
-export type ResponseStatusType = 'success' | 'error'
+export type ResponseStatusType = "success" | "error";

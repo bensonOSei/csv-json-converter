@@ -8,7 +8,7 @@ export class Response {
     private readonly statusCode: number | null = 200,
     private readonly message: string | null = "Operation successful",
     private readonly data: string | object | null = null,
-    private readonly error: object | string | null = null
+    private readonly error: object | string | null = null,
   ) {}
 
   // Method to format and return the response
@@ -25,7 +25,7 @@ export class Response {
   // Static method for successful responses
   static success(
     message: string = "Operation successful",
-    statusCode: number = 200
+    statusCode: number = 200,
   ): IResponse {
     return new Response("success", statusCode, message).send();
   }
@@ -34,16 +34,16 @@ export class Response {
   static error(
     error: object | string,
     message: string = "Something went wrong",
-    statusCode: number = 500
+    statusCode: number = 500,
   ): IResponse {
     return new Response("error", statusCode, message, null, error).send();
   }
 
   // Static method for successful responses with data
   static successWithData(
-      data: object | string,
+    data: object | string,
     message: string = "Operation successful",
-    statusCode: number = 200
+    statusCode: number = 200,
   ): IResponse {
     return new Response("success", statusCode, message, data).send();
   }
