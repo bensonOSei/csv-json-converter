@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { Controller } from "./Controller";
 import { CsvConverter } from "../services/CsvConverter";
 import { Response as JsonResponse } from "../utils/Response";
@@ -12,17 +12,18 @@ export class CsvController extends Controller {
     return response.json(JsonResponse.success());
   }
 
-  public async convert(
-    req: Request,
-    response: Response
-  ): Promise<Response<any, Record<string, any>>> {
+  public async convert(req: Request, response: Response, next: NextFunction) {
     const path = req.file?.path;
 
-    if (!path) throw Error("no file path found");
+    try {
+      if (!path) throw Error("no file path found");
 
-    const converter = new CsvConverter(path);
-    await converter.convert();
-    const results = JSON.stringify(converter.results);
-    return response.json(JsonResponse.successWithData(results));
+      const converter = new CsvConverter(path);
+      await converter.convert();
+      const results = JSON.stringify(converter.results);
+      return response.json(JsonResponse.successWithData(results));
+    } catch (err) {
+      next(err);
+    }
   }
 }
