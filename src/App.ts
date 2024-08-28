@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import { Routes } from "./Routes";
 import { ErrorHandler } from "./middleware/ErrorHandler";
+import cors from "cors";
 
 export class App {
   public express: Application;
@@ -14,6 +15,8 @@ export class App {
 
   private middleware() {
     this.express.use(express.json());
+    this.express.use(express.urlencoded({ extended: true }));
+    this.express.use(cors());
   }
 
   private routes() {
